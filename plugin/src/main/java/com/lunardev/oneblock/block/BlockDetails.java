@@ -27,7 +27,7 @@ public class BlockDetails {
     private OfflinePlayer owner;
     @Getter
     private Material currentBlock;
-    private Random rand;
+    private final Random rand;
 
     public BlockDetails(Level currentLevel, Location location, OfflinePlayer owner) {
         this.currentLevel = currentLevel;
