@@ -1,20 +1,20 @@
 package com.lunardev.oneblock.block;
 
-import org.bukkit.entity.Mob;
+import org.bukkit.entity.EntityType;
 
 import java.util.List;
 import java.util.Random;
 
 public class MobPool {
 
-    private final List<Mob[]> mobPool;
+    private final List<EntityType[]> pool;
 
-    public MobPool(List<Mob[]> mobPool) {
-        this.mobPool = mobPool;
+    public MobPool(List<EntityType[]> mobPool) {
+        this.pool = mobPool;
     }
 
-    public Mob[] getRandomMobSet(Random rand) {
-        return mobPool.get(rand.nextInt(mobPool.size()));
+    public EntityType[] getRandomMobSet(Random rand) {
+        return pool.get(rand.nextInt(pool.size()));
     }
 
 }

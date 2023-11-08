@@ -6,7 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
-import org.bukkit.entity.Mob;
+import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -84,11 +84,11 @@ public class BlockDetails {
         currentBlock = material;
 
         if (rand.nextFloat(1) < 0.02) {
-            Mob[] mobSet = currentLevel.getMobPool().getRandomMobSet(rand);
-            for (Mob mob : mobSet) {
+            EntityType[] mobSet = currentLevel.getMobPool().getRandomMobSet(rand);
+            for (EntityType mob : mobSet) {
                 Location loc = location.clone().add(rand.nextDouble(0.5d, 3), 0d,
                         rand.nextDouble(0.5d, 3));
-                mob.spawnAt(loc);
+                loc.getWorld().spawnEntity(loc, mob, true);
             }
         }
     }
