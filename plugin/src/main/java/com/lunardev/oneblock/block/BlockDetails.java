@@ -1,6 +1,7 @@
 package com.lunardev.oneblock.block;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -26,6 +27,7 @@ public class BlockDetails {
     @Getter
     private OfflinePlayer owner;
     @Getter
+    @Setter
     private Material currentBlock;
     private final Random rand;
 
