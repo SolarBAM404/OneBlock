@@ -18,6 +18,8 @@ public final class OneBlockPlugin extends JavaPlugin {
             return;
         }
 
+        MainCommand.setupCommand(this);
+
     }
 
     @Override
