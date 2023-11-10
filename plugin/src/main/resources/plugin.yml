@@ -1,4 +1,0 @@
-name: OneBlockPlugin
-version: '${version}'
-main: com.lunardev.oneblock.OneBlockPlugin
-api-version: '1.20'
