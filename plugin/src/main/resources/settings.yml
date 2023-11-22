@@ -1,0 +1,82 @@
+# !-----------------------------------------------------------------------------------------------!
+#                       Welcome to the main configuration of ${project.name}
+# !-----------------------------------------------------------------------------------------------!
+#
+#    This is the main plugin's settings class.
+#
+#    For support and documentation, please visit:
+#    - https://github.com/${author}/${project.name}/wiki
+#
+# !-----------------------------------------------------------------------------------------------!
+#
+#    1) COLOR CODES are supported with the '&' character.
+#       - For usage, see http://minecraftwiki.net/wiki/Formatting_codes
+#       - When you use them, place quotes around the message like this: "Hello &cworld."
+#       - To use HEX colors, use #123456 syntax: "Hello #123456world."
+#
+#    2) TO HIDE any message, set it to 'none'.
+#
+#    3) For UNICODE CHARACTERS (smileys, symbols, ..), save the file in UTF-8 encoding. See
+#       - https://github.com/${author}/${project.name}/wiki/Use-Right-Encoding
+#
+#    4) JSON is supported.
+#       - For usage, see https://github.com/${author}/${project.name}/wiki/JSON
+#
+#    5) WHITELISTS can be turned into blacklists, by putting "@blacklist" on the first line.
+#       - Doing such, filters will only apply for messages in those lists.
+#
+#    PS: Everything above applies for all files in ${project.name}/ folder.
+#
+# !-----------------------------------------------------------------------------------------------!
+
+# -------------------------------------------------------------------------------------------------
+# World settings
+# -------------------------------------------------------------------------------------------------
+Block_World_Name: "world"
+
+# -------------------------------------------------------------------------------------------------
+# Game settings
+# -------------------------------------------------------------------------------------------------
+Level_Up_Play_Sound: true
+Level_Up_Sound: "ENTITY_PLAYER_LEVELUP"
+Level_Up_Show_Title: true
+
+# View can be "action_bar" or "xp_bar".
+# Xp bar will override the vanilla experience bar, so you won't see your experience points.
+Level_View: action_bar
+
+Minimum_Blocks_Before_Mobs_Spawn: 10
+
+# Once these are setup, I advise you don't change them as it will mess up your players' blocks.
+Block_Size: 256
+Block_Distance: 128
+
+
+# -------------------------------------------------------------------------------------------------
+# What language should we use for messages? If it exists, the language file will be copied
+# to your messages/ folder where you can edit it.
+# -------------------------------------------------------------------------------------------------
+Locale: en
+
+# -------------------------------------------------------------------------------------------------
+# The prefix used in front of most chat or console messages.
+# -------------------------------------------------------------------------------------------------
+Prefix: "&8[&c$OneBlock&8]&7 "
+
+# -------------------------------------------------------------------------------------------------
+# Time of some plugin's operations is measured. You can also use the LagCatcher class to invoke
+# this feature. We log a console message if an operation takes over the time below (milliseconds).
+# Set to -1 to disable.
+# -------------------------------------------------------------------------------------------------
+Log_Lag_Over_Milis: 60
+
+# -------------------------------------------------------------------------------------------------
+# List of section names that will print informative messages about this plugin's features.
+# The Debugger class utilizes this key and will only print messages for sections enabled below.
+# -------------------------------------------------------------------------------------------------
+Debug: [ ]
+
+# -------------------------------------------------------------------------------------------------
+# Do not change this value, otherwise it will corrupt your plugin installation!
+# -------------------------------------------------------------------------------------------------
+Version: 1

@@ -1,40 +1,74 @@
 package com.lunardev.oneblock;
 
-import com.lunardev.oneblock.events.BlockEvent;
-import org.bukkit.event.Listener;
-import org.bukkit.plugin.java.JavaPlugin;
+import com.lunardev.oneblock.block.BlockDetails;
+import com.lunardev.oneblock.block.Level;
+import com.lunardev.oneblock.misc.VoidWorldGenerator;
+import com.lunardev.oneblock.settings.BlocksConfig;
+import com.lunardev.oneblock.settings.LevelsConfig;
+import com.lunardev.oneblock.settings.Settings;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
+import org.mineacademy.fo.Common;
+import org.mineacademy.fo.plugin.SimplePlugin;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.logging.Level;
+import java.util.List;
 
-public final class OneBlockPlugin extends JavaPlugin {
+
+public final class OneBlockPlugin extends SimplePlugin {
+
+    @Getter
+    @Setter(AccessLevel.PRIVATE)
+    private static OneBlockPlugin instance;
+
+    @Getter
+    private List<BlockDetails> blocks;
+
+    @Getter
+    private LevelsConfig levelsConfig;
+    @Getter
+    private BlocksConfig blockDetailsConfig;
+
+    private World blockWorld;
 
     @Override
-    public void onEnable() {
-        // Plugin startup logic
-        setupListeners(BlockEvent.class);
-
+    protected void onPluginStart() {
+        setInstance(this);
         if (!getServer().getPluginManager().isPluginEnabled(this)) {
             return;
         }
 
-        MainCommand.setupCommand(this);
+        Common.runLater(() -> {
+            blockWorld = getBlockWorld();
+            levelsConfig = new LevelsConfig();
+            blockDetailsConfig = new BlocksConfig();
+        });
+        Common.runTimerAsync(5 * 20, 5 * 20, () -> blockDetailsConfig.save());
 
     }
 
     @Override
-    public void onDisable() {
-        // Plugin shutdown logic
-        getLogger().log(Level.INFO, "Shutting down plugin...");
+    protected void onPluginReload() {
+        Common.cancelTasks();
+        Level.resetLevels();
+        levelsConfig.reload();
+        BlockDetails.getBlocks().clear();
+        blockDetailsConfig.reload();
+
+        Common.runTimerAsync(5 * 20, 5 * 20, () -> blockDetailsConfig.save());
     }
 
-    private void setupListeners(Class<? extends Listener> listenerClass) {
-        try {
-            getServer().getPluginManager().registerEvents(listenerClass.getDeclaredConstructor().newInstance(), this);
-        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-            getServer().getPluginManager().disablePlugin(this);
-            getLogger().log(Level.SEVERE, String.format("Could not load %s listener", listenerClass.getName()));
+    public World getBlockWorld() {
+        World world = Bukkit.getWorld(Settings.BLOCK_WORLD_NAME);
+
+        if (world == null) {
+            world = Bukkit.createWorld(new WorldCreator(Settings.BLOCK_WORLD_NAME).generator(new VoidWorldGenerator()));
         }
+
+        return world;
     }
 
 }
